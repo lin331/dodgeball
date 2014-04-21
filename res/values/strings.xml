@@ -4,5 +4,9 @@
     <string name="app_name">Dodgeball</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="dodgeball">Dodgeball</string>
+    <string name="new_game">Start New Game</string>
+    <string name="highscores">Highscores</string>
+    <string name="about">About</string>
 
 </resources>

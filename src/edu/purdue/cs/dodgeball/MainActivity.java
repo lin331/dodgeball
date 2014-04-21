@@ -3,9 +3,10 @@ package edu.purdue.cs.dodgeball;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.graphics.Color;
 
 public class MainActivity extends Activity {
-
+	DrawTest drawTest;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
