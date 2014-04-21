@@ -1,4 +1,6 @@
-import java.sql.*;  
+package edu.purdue.cs.dodgeball;
+
+import java.sql.*;
 import java.util.*;
 
 public class JavaToMysql {

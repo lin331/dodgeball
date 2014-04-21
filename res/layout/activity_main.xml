@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:layout_centerHorizontal="true"
-        android:text="@string/new_game"/>
+        android:text="@string/new_game"
+        android:onClick="startGame"/>
     <Button
         android:id="@+id/scores"
         android:layout_width="188dp"
