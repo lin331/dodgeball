@@ -12,7 +12,8 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 public class DrawTest extends View {
@@ -31,6 +32,12 @@ public class DrawTest extends View {
 	public synchronized void onDraw(Canvas canvas) {
 		paint.setColor(Color.GREEN);
 		canvas.drawCircle(x, y, width, paint);
+		paint.setColor(Color.BLACK);
+		paint.setTextSize(50);
+		int score = 0;
+		Timer t = new Timer();
+		canvas.drawText("Score: "+score, 150, 50, paint);
+		score += 10;	
 	}
         
 	@Override
