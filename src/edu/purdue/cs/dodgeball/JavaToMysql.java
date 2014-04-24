@@ -29,7 +29,7 @@ public class JavaToMysql {
     public static void getConnection() {    
     	try{
     		HttpClient httpclient = new DefaultHttpClient();   
-    		HttpGet httpget = new HttpGet("http://10.184.196.33/test.php"); 
+    		HttpGet httpget = new HttpGet("http://lemonbear.cu.cc/CS252/test.php"); 
     		HttpResponse response = httpclient.execute(httpget);
     		HttpEntity entity = response.getEntity();
     		is = entity.getContent();
@@ -65,7 +65,7 @@ public class JavaToMysql {
 			jArray = new JSONArray(result);
 			for(int i=0;i<jArray.length();i++){                    
 	    		JSONObject json_data = jArray.getJSONObject(i);    
-	    		highscore[i]=json_data.getInt("Highest Score");
+	    		highscore[i]=json_data.getInt("HighestScore");
 	    		username[i]=json_data.getString("Username");
 	    		System.out.println("User:"+username[i]+" Highest Score:"+highscore[i]);
 	    	}
