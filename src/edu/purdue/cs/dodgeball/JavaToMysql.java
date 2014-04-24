@@ -1,60 +1,68 @@
 package edu.purdue.cs.dodgeball;
 
 import java.sql.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.util.Log;
 
 public class JavaToMysql {
 	static Connection conn; 
     static Statement st; 
-    static ResultSet rs;    
-    public static Connection getConnection() {    
-    	Connection con = null;
-        try {    
-            Class.forName("com.mysql.jdbc.Driver");  
-            String url = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql337126";
-            String user = "sql337126";
-            String password = "mB6!mL9*";
-            con = DriverManager.getConnection(url,user,password);
-        } catch (Exception e) {    
-            System.out.println("Connection Error" + e.getMessage());    
-        }    
-        return con;     
+    static ResultSet rs;   
+    static JSONArray jArray;
+    static String result = null;
+    static InputStream is = null;
+    static StringBuilder sb = null;
+    public static void getConnection() {    
+    	try{
+    		HttpClient httpclient = new DefaultHttpClient();   
+    		HttpGet httpget = new HttpGet("http://10.184.196.33/test.php"); 
+    		HttpResponse response = httpclient.execute(httpget);
+    		HttpEntity entity = response.getEntity();
+    		is = entity.getContent();
+    		System.out.println("Connection Set");
+    	}catch(Exception e){
+            Log.e("log_tag", "Error in http connection" + e.toString());
+    	}
     }
     public static int insert_data(String str1, String str2){
-    	conn = getConnection();
-    	try{
-    		String sql1 = "INSERT INTO CS252Lab6 ";
-    		String sql2 = "VALUES";
-    		String sql = sql1+str1+sql2+str2;
-    		st = (Statement) conn.createStatement();
-    		rs = st.executeQuery(sql);
-    	}catch(Exception e){
-    		return 1;
-    	}
+    	getConnection();
     	return 0;
     }
     public static void print_data(){
-    	conn = getConnection();
-    	try{
-    		String sql = "SELECT * FROM  `CS252Lab6` LIMIT 0 , 30";
-    		st = (Statement) conn.createStatement();
-    		rs = st.executeQuery(sql);
-    		while(rs.next()){
-    			String username = rs.getString("Username");
-    			String country = rs.getString("Country");
-    			String email = rs.getString("Email");
-    			String highscore = rs.getString("HighestScore");
-    			System.out.println("Username:"+username);
-    			System.out.println("Country:"+country);
-    			System.out.println("Email:"+email);
-    			System.out.println("Highest Score:"+highscore);
-    		}
-        	conn.close();
-    	}catch (Exception e){
-            System.out.println("Connection Error" + e.getMessage());    
-    	}
+    	getConnection();
+    	try {
+            BufferedReader reader = new BufferedReader(
+                   new InputStreamReader(is, "iso-8859-1"), 8);
+            sb = new StringBuilder();
+            sb.append(reader.readLine() + "\n");
+
+            String line = "0";
+            while ((line = reader.readLine()) != null) {
+               sb.append(line + "\n");
+            }
+            is.close();
+            result = sb.toString();
+            System.out.println(result);
+        } catch (Exception e) {
+            Log.e("log_tag", "Error converting result " + e.toString());
+        }
+    	
+    	
+    	
     }
-    public static void main(String[] args) { 
-    	print_data();
-	}
 }
