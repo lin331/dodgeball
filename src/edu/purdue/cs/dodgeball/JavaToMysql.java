@@ -1,6 +1,5 @@
 package edu.purdue.cs.dodgeball;
 
-import java.sql.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,16 +16,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.net.ParseException;
 import android.util.Log;
 
-public class JavaToMysql {
-	static Connection conn; 
-    static Statement st; 
-    static ResultSet rs;   
+public class JavaToMysql {  
     static JSONArray jArray;
     static String result = null;
     static InputStream is = null;
     static StringBuilder sb = null;
+    static String username[] = new String[1024] ;
+    static int highscore[] = new int[1024];
     public static void getConnection() {    
     	try{
     		HttpClient httpclient = new DefaultHttpClient();   
@@ -43,7 +42,7 @@ public class JavaToMysql {
     	getConnection();
     	return 0;
     }
-    public static void print_data(){
+    public static void print_data() {
     	getConnection();
     	try {
             BufferedReader reader = new BufferedReader(
@@ -61,8 +60,18 @@ public class JavaToMysql {
         } catch (Exception e) {
             Log.e("log_tag", "Error converting result " + e.toString());
         }
-    	
-    	
-    	
+    	JSONArray jArray;
+		try {
+			jArray = new JSONArray(result);
+			for(int i=0;i<jArray.length();i++){                    
+	    		JSONObject json_data = jArray.getJSONObject(i);    
+	    		highscore[i]=json_data.getInt("Highest Score");
+	    		username[i]=json_data.getString("Username");
+	    		System.out.println("User:"+username[i]+" Highest Score:"+highscore[i]);
+	    	}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}           
     }
 }

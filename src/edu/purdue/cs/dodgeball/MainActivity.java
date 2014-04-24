@@ -1,5 +1,7 @@
 package edu.purdue.cs.dodgeball;
 
+import org.json.JSONException;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -21,17 +23,12 @@ public class MainActivity extends Activity {
             @Override
             protected Void doInBackground(Void... params)
             {
-            	JavaToMysql.getConnection();
             	JavaToMysql.print_data();
                 return null;
             }
         }.execute();
 	} 
-	
-    protected String doInBackground() {
-		
-		return null;
-	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
