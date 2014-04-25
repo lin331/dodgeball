@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
             @Override
             protected Void doInBackground(Void... params)
             {
+            	//JavaToMysql.insert_data("LemonBear", "123");
             	JavaToMysql.print_data();
                 return null;
             }
