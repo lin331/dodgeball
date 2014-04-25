@@ -14,6 +14,8 @@ import android.graphics.Color;
 public class MainActivity extends Activity {
 	DrawTest drawTest;
     private AsyncTask<Void, Void, Void> task;
+    private TextView textView_username[] = new TextView[11];
+    private TextView textView_score[] = new TextView[11];
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,6 +35,7 @@ public class MainActivity extends Activity {
 		setContentView(drawTest);
 	}
 	public void showScore(View view){
+		System.out.println(JavaToMysql.flag);
 		ProgressBar progressBar;
         progressBar = (ProgressBar)findViewById(R.id.progressBar1);
         progressBar.setVisibility(View.VISIBLE);
@@ -61,9 +64,6 @@ public class MainActivity extends Activity {
         }
         progressBar.setVisibility(View.INVISIBLE);
 		setContentView(R.layout.highscoure);
-	    TextView textView_username[] = new TextView[11];
-	    TextView textView_score[] = new TextView[11];
-
 	    textView_username[1]= (TextView) findViewById(R.id.textView1Username);
 	    textView_username[2]= (TextView) findViewById(R.id.textView2Username);
 	    textView_username[3]= (TextView) findViewById(R.id.textView3Username);
@@ -87,22 +87,19 @@ public class MainActivity extends Activity {
 	    int i;
 	    for(i=0;i<10;i++){
 	    	if(JavaToMysql.username[i]!=null){
-	    		try{
 	    		textView_username[i+1].setText(JavaToMysql.username[i]); 
 	    		textView_score[i+1].setText(String.valueOf(JavaToMysql.highscore[i])); 
-	    		}catch(Exception e){
-					e.printStackTrace();
-	    		}
 	    	}
 	    	else{
 	    		textView_username[i+1].setText("Empty"); 
 	    		textView_score[i+1].setText("0"); 	    	
 	    	}
 	    }
-
+	    JavaToMysql.flag=0;
 	}
 	public void showMenu(View View){
 		setContentView(R.layout.activity_main);
 	}
-
 }
+
+
