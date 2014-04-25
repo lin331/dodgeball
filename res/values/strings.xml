@@ -8,5 +8,6 @@
     <string name="new_game">Start New Game</string>
     <string name="highscores">Highscores</string>
     <string name="about">About</string>
+    <string name="OK">OK</string>
 
 </resources>

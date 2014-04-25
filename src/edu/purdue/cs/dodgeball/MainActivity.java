@@ -45,5 +45,11 @@ public class MainActivity extends Activity {
 		drawTest = new DrawTest(this);
 		setContentView(drawTest);
 	}
+	public void showScore(View view){
+		setContentView(R.layout.highscoure);
+	}
+	public void showMenu(View View){
+		setContentView(R.layout.activity_main);
+	}
 
 }
