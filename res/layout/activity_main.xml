@@ -39,4 +39,15 @@
         android:layout_below="@id/scores"
         android:layout_centerHorizontal="true"
         android:text="@string/about"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/about"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible" />
+
 </RelativeLayout>

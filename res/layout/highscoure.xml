@@ -1,9 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
-
+ 		<TextView
+        	android:id="@+id/textViewTop10"
+       		android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentTop="true"
+        	android:layout_centerHorizontal="true"
+        	android:layout_marginTop="20dp"
+        	android:text="@string/Leaderboard"
+        	android:textAppearance="?android:attr/textAppearanceLarge" 
+        />
+ 
+ 
     <Button
         android:id="@+id/OK"
         android:layout_width="188dp"
@@ -13,5 +23,219 @@
         android:layout_alignParentBottom="true"
         android:text="@string/OK"
  		android:onClick="showMenu"/>
+
+    <TextView
+        android:id="@+id/TextViewScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewUsername"
+        android:layout_alignBottom="@+id/textViewUsername"
+        android:layout_toRightOf="@+id/textViewTop10"
+        android:text="@string/Score"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewTop10"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="17dp"
+        android:text="@string/Username"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView1Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewUsername"
+        android:layout_below="@+id/textViewUsername"
+        android:layout_marginTop="14dp"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView1Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1Username"
+        android:layout_toRightOf="@+id/textViewTop10"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView2Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1Username"
+        android:layout_below="@+id/textView1Username"
+        android:text="@string/Loading"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView2Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2Username"
+        android:layout_alignBottom="@+id/textView2Username"
+        android:layout_alignLeft="@+id/TextViewScore"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/textView3Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2Username"
+        android:layout_below="@+id/textView2Username"
+        android:text="@string/Loading"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView3Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3Username"
+        android:layout_alignBottom="@+id/textView3Username"
+        android:layout_alignLeft="@+id/TextViewScore"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/textView4Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3Username"
+        android:layout_below="@+id/textView3Username"
+        android:text="@string/Loading"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView4Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView4Username"
+        android:layout_alignBottom="@+id/textView4Username"
+        android:layout_alignLeft="@+id/TextViewScore"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/textView5Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4Username"
+        android:layout_below="@+id/textView4Username"
+        android:text="@string/Loading"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView5Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView5Username"
+        android:layout_alignBottom="@+id/textView5Username"
+        android:layout_alignLeft="@+id/TextViewScore"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/textView6Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView5Username"
+        android:layout_below="@+id/textView5Username"
+        android:text="@string/Loading"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView6Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView6Username"
+        android:layout_alignBottom="@+id/textView6Username"
+        android:layout_alignLeft="@+id/TextViewScore"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+     <TextView
+        android:id="@+id/textView7Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView6Username"
+        android:layout_below="@+id/textView6Username"
+        android:text="@string/Loading"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView7Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView7Username"
+        android:layout_alignBottom="@+id/textView7Username"
+        android:layout_alignLeft="@+id/TextViewScore"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+     <TextView
+        android:id="@+id/textView8Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView7Username"
+        android:layout_below="@+id/textView7Username"
+        android:text="@string/Loading"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView8Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView8Username"
+        android:layout_alignBottom="@+id/textView8Username"
+        android:layout_alignLeft="@+id/TextViewScore"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+ <TextView
+        android:id="@+id/textView9Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView8Username"
+        android:layout_below="@+id/textView8Username"
+        android:text="@string/Loading"
+		android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView9Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView9Username"
+        android:layout_alignBottom="@+id/textView9Username"
+        android:layout_alignLeft="@+id/TextViewScore"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView10Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView10Username"
+        android:layout_alignBottom="@+id/textView10Username"
+        android:layout_alignLeft="@+id/textView9Score"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView10Username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView9Username"
+        android:layout_below="@+id/textView9Username"
+        android:layout_marginTop="10dp"
+        android:text="@string/Loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

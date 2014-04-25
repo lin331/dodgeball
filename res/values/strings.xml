@@ -9,5 +9,9 @@
     <string name="highscores">Highscores</string>
     <string name="about">About</string>
     <string name="OK">OK</string>
-
+	<string name="Loading">Loading</string>
+	<string name="Leaderboard">Top 10 Players</string>
+	<string name="Username">Username</string>
+	<string name="Score">Score</string>
+	
 </resources>

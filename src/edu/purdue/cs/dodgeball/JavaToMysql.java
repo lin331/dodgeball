@@ -28,6 +28,7 @@ public class JavaToMysql {
     static StringBuilder sb = null;
     static String username[] = new String[1024] ;
     static int highscore[] = new int[1024];
+    static int flag = 0;
     public static void getConnection() {    
     	try{
     		HttpClient httpclient = new DefaultHttpClient();   
@@ -55,6 +56,7 @@ public class JavaToMysql {
     	return 0;
     }
     public static void print_data() {
+    	flag = 0;
     	getConnection();
     	try {
             BufferedReader reader = new BufferedReader(
@@ -85,5 +87,6 @@ public class JavaToMysql {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}           
+		flag = 1;
     }
 }
