@@ -5,6 +5,7 @@ import org.json.JSONException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -31,8 +32,8 @@ public class MainActivity extends Activity {
 	}
 	
 	public void startGame(View view) {
-		drawTest = new DrawTest(this);
-		setContentView(drawTest);
+		Intent intent = new Intent(this, GameActivity.class);
+		startActivity(intent);
 	}
 	public void showScore(View view){
 		System.out.println(JavaToMysql.flag);
