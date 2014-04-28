@@ -17,11 +17,14 @@ public class MainActivity extends Activity {
     private AsyncTask<Void, Void, Void> task;
     private TextView textView_username[] = new TextView[11];
     private TextView textView_score[] = new TextView[11];
+    private ProgressBar progressBar;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-	} 
+        progressBar = (ProgressBar)findViewById(R.id.progressBar1);
+    } 
 
 
 	@Override
@@ -34,12 +37,22 @@ public class MainActivity extends Activity {
 	public void startGame(View view) {
 		Intent intent = new Intent(this, GameActivity.class);
 		startActivity(intent);
+		task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params)
+            {
+            	//username and score using string
+            	//JavaToMysql.insert_data(username, score);
+            	//JavaToMysql.print_data();
+                return null;
+            }
+        }.execute();
 	}
 	public void showScore(View view){
 		System.out.println(JavaToMysql.flag);
-		ProgressBar progressBar;
         progressBar = (ProgressBar)findViewById(R.id.progressBar1);
         progressBar.setVisibility(View.VISIBLE);
+        progressBar.setProgress(0);  
 		//
 		//JavaToMysql.getConnection() run on background
 		//User name stored at JavaToMysql.username[] 
