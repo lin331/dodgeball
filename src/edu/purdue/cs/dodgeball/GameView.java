@@ -17,37 +17,58 @@ public class GameView extends View {
 
     private Paint p; // Used during onDraw()
     private boolean active; // If our logic is still active
-
+    private static final int MAX = 50;
+    
+    private int score = 0;
     Player player = new Player(240,400);
-    ArrayList<Ball> balls = new ArrayList<Ball>(50);
+    ArrayList<Ball> balls = new ArrayList<Ball>(MAX);
     Random rand = new Random();
     
     public GameView(Context context) {
         super(context);
         
         p = new Paint();
+        p.setTextSize(20);
         active = true;
     }
 
     // We draw everything here. This is by default in its own thread (the UI thread).
     // Let's just call this thread THREAD_A.
     public void onDraw(Canvas c) {
+    	p.setColor(Color.BLACK);
+    	c.drawText("Score: " + score, 50, 50, p);
         p.setColor(Color.GREEN);
     	c.drawCircle(player.getX(), player.getY(), 30, p);
     	p.setColor(Color.RED);
-    	for (Ball temp : balls) {
-    		c.drawCircle(temp.xcoord(), temp.ycoord(), 20, p);
+    	if (!balls.isEmpty()) {
+	    	for (Ball temp : balls) {
+	    		c.drawCircle(temp.getX(), temp.getY(), 20, p);
+	    	}
     	}
     }
 
     // This just updates our position based on a delta that's given.
     public void update(int delta) {
-    	for (Ball temp : balls) {
-    		Velocity v = temp.vel();
-    		temp.setx(temp.xcoord() + v.xspeed());
-    		temp.sety(temp.ycoord() + v.yspeed());
+    	if (!balls.isEmpty()) {
+	    	for (Ball temp : balls) {
+	    		Velocity v = temp.getV();
+	    		int newX = temp.getX() + v.getX();
+	    		int newY = temp.getY() + v.getY();
+	    		boolean isHit = temp.hit(player);
+	    		if (isHit) {
+	    			active = false;
+	    		}
+	    		if (newX >= 480) {
+	    			score++;
+	    		}
+	    		else if (newY >= 800) {
+	    			score++;
+	    		}
+    			temp.setx(newX);
+    			temp.sety(newY);
+	    	}
+			postInvalidate(); // Tells our view to redraw itself, since our position changed.
     	}
-		postInvalidate(); // Tells our view to redraw itself, since our position changed.
     }
 
     // The important part!
@@ -75,6 +96,13 @@ public class GameView extends View {
                     update(delta); // Call update with our delta
                     time1 = time2; // Update our time variables.
                     if (rand.nextInt(10) == 5) {
+                    	if (balls.size() == MAX) {
+                    		int i = 0;
+                    		while (i < 15) {
+                    			balls.remove(0);
+                    			i++;
+                    		}
+                    	}
                     	if (rand.nextInt(2) == 1) {
                     		balls.add(new Ball(rand.nextInt(400), 0, 0, rand.nextInt(20)+10));
                     	}

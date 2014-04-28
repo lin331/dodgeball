@@ -1,13 +1,7 @@
 package edu.purdue.cs.dodgeball;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.SurfaceHolder;
-import android.view.SurfaceHolder.Callback;
-import android.view.SurfaceView;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 public class GameActivity extends Activity {

@@ -9,11 +9,21 @@ public class Velocity {
 		this.y = y;
 	}
 	
-	public int xspeed() {
+	public int getX() {
 		return x;
 	}
 	
-	public int yspeed() {
+	public int getY() {
 		return y;
+	}
+	
+	public boolean equals(Velocity v) {
+		if (v.getX() != x) {
+			return false;
+		}
+		else if (v.getY() != y) {
+			return false;
+		}
+		return true;
 	}
 }
