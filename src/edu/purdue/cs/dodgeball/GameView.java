@@ -3,21 +3,22 @@ package edu.purdue.cs.dodgeball;
 import java.util.ArrayList;
 import java.util.Random;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class GameView extends View {
-	// Of course, this stuff should be in its own object, but just for this example..
-    //private float position; // Where our dot is
-    //private float velocity; // How fast the dot's moving
-
-    private Paint p; // Used during onDraw()
-    private boolean active; // If our logic is still active
+    private Paint p;
+    private boolean active;
     private static final int MAX = 50;
+    private static final long start = System.currentTimeMillis();
+    private static final int moveSpeed = 10;
     
     private int score = 0;
     Player player = new Player(240,400);
@@ -26,17 +27,14 @@ public class GameView extends View {
     
     public GameView(Context context) {
         super(context);
-        
         p = new Paint();
         p.setTextSize(20);
         active = true;
     }
 
-    // We draw everything here. This is by default in its own thread (the UI thread).
-    // Let's just call this thread THREAD_A.
     public void onDraw(Canvas c) {
     	p.setColor(Color.BLACK);
-    	c.drawText("Score: " + score, 50, 50, p);
+    	c.drawText("Score: " + score/10, 50, 50, p);
         p.setColor(Color.GREEN);
     	c.drawCircle(player.getX(), player.getY(), 30, p);
     	p.setColor(Color.RED);
@@ -45,56 +43,63 @@ public class GameView extends View {
 	    		c.drawCircle(temp.getX(), temp.getY(), 20, p);
 	    	}
     	}
+    	p.setColor(Color.BLACK);
+    	c.drawText("Score: " + score/10, 50, 50, p);
     }
 
-    // This just updates our position based on a delta that's given.
-    public void update(int delta) {
+    public int update(int delta) {
+    	if (delta == 0) {
+			postInvalidate();
+    		return 0;
+    	}
     	if (!balls.isEmpty()) {
 	    	for (Ball temp : balls) {
 	    		Velocity v = temp.getV();
-	    		int newX = temp.getX() + v.getX();
-	    		int newY = temp.getY() + v.getY();
+	    		float newX = temp.getX() + v.getX();
+	    		float newY = temp.getY() + v.getY();
+	    		score++;
 	    		boolean isHit = temp.hit(player);
 	    		if (isHit) {
 	    			active = false;
-	    		}
-	    		if (newX >= 480) {
-	    			score++;
-	    		}
-	    		else if (newY >= 800) {
-	    			score++;
+	    			balls.clear();
+	    			Context context = getContext();
+	    			Intent intent = new Intent(context, ScoreActivity.class);
+	    			Bundle b = new Bundle();
+	    			b.putInt("score", score/10);
+	    			intent.putExtras(b);
+	    			context.startActivity(intent);
+	    			return 1;
 	    		}
     			temp.setx(newX);
     			temp.sety(newY);
 	    	}
-			postInvalidate(); // Tells our view to redraw itself, since our position changed.
+			postInvalidate();
     	}
+    	return 0;
     }
-
-    // The important part!
-    // This starts another thread (let's call this THREAD_B). THREAD_B will run completely
-    // independent from THREAD_A (above); therefore, FPS changes will not affect how
-    // our velocity increases our position.
+    
     public void start() {
         new Thread() {
             public void run() {
-                // Store the current time values.
                 long time1 = System.currentTimeMillis();
                 long time2;
-
-                // Once active is false, this loop (and thread) terminates.
                 while (active) {
                     try {
-                        // This is your target delta. 25ms = 40fps
                         Thread.sleep(25);
                     } catch (InterruptedException e1) {
                         e1.printStackTrace();
                     }
-
-                    time2 = System.currentTimeMillis(); // Get current time
-                    int delta = (int) (time2 - time1); // Calculate how long it's been since last update
-                    update(delta); // Call update with our delta
-                    time1 = time2; // Update our time variables.
+                    while(time1-start < 2000) {
+                    	time1 = System.currentTimeMillis();
+                    	update(0);
+                    }
+                    time2 = System.currentTimeMillis();
+                    int delta = (int) (time2 - time1);
+                    if (update(delta) == 1) {
+    	    			Context context = getContext();
+                    	((Activity)context).finish();
+                    }
+                    time1 = time2;
                     if (rand.nextInt(10) == 5) {
                     	if (balls.size() == MAX) {
                     		int i = 0;
@@ -104,38 +109,32 @@ public class GameView extends View {
                     		}
                     	}
                     	if (rand.nextInt(2) == 1) {
-                    		balls.add(new Ball(rand.nextInt(400), 0, 0, rand.nextInt(20)+10));
+                    		balls.add(new Ball(rand.nextInt(400), 0, 0, rand.nextInt(moveSpeed)+10));
                     	}
                     	else {
-                    		balls.add(new Ball(0, rand.nextInt(800), rand.nextInt(20)+10, 0));
+                    		balls.add(new Ball(0, rand.nextInt(800), rand.nextInt(moveSpeed)+10, 0));
                     	}
                     }
                 }
             }
-        }.start(); // Start THREAD_B
+        }.start();
     }
     
 	public boolean onTouchEvent(MotionEvent motionEvent) {
-		int newx = (int) motionEvent.getX();
-		int newy = (int) motionEvent.getY();
-		int movementSpeed = 5;
-		if (player.getX() < newx) {
-			player.setX(player.getX() + movementSpeed);
-		}
-		else if (player.getX() > newx) {
-			player.setX(player.getX() - movementSpeed);
-		}
-		if (player.getY() < newy) {
-			player.setY(player.getY() + movementSpeed);
-		}
-		else if (player.getY() > newy) {
-			player.setY(player.getY() - movementSpeed);
-		}
-		this.invalidate();
+		float touchX = motionEvent.getX();
+		float touchY = motionEvent.getY();
+		float moveSpeed = 10;
+		
+		float normal = (float) (moveSpeed / Math.hypot(player.getX() - touchX, player.getY() - touchY));
+		float newX = (touchX - player.getX()) * normal;
+		float newY = (touchY - player.getY()) * normal;
+		
+		player.setX(player.getX() + newX);
+		player.setY(player.getY() + newY);
+		
 		return true;
 	}
 	
-    // Method that's called by the activity
     public void setActive(boolean active) {
         this.active = active;
     }

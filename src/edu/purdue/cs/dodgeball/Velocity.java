@@ -1,19 +1,19 @@
 package edu.purdue.cs.dodgeball;
 
 public class Velocity {
-	private int x;
-	private int y;
+	private float x;
+	private float y;
 	
-	public Velocity(int x, int y) {
+	public Velocity(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 	
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 	

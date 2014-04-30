@@ -1,29 +1,29 @@
 package edu.purdue.cs.dodgeball;
 
-public class Ball implements Comparable<Ball> {
-	private int x;
-	private int y;
+public class Ball {
+	private float x;
+	private float y;
 	private Velocity v;
 	
-	public Ball(int x, int y, int xspeed, int yspeed) {
+	public Ball(float x, float y, float xspeed, float yspeed) {
 		this.x = x;
 		this.y = y;
 		this.v = new Velocity(xspeed,yspeed);
 	}
 	
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 	
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 	
-	public void setx(int x) {
+	public void setx(float x) {
 		this.x = x;
 	}
 	
-	public void sety(int y) {
+	public void sety(float y) {
 		this.y = y;
 	}
 	
@@ -36,19 +36,5 @@ public class Ball implements Comparable<Ball> {
 			return true;
 		}
 		return false;
-	}
-	
-	@Override
-	public int compareTo(Ball b) {
-		if (b.getX() != x) {
-			return 0;
-		}
-		if (b.getY() != y) {
-			return 0;
-		}
-		if (!b.getV().equals(v)) {
-			return 0;
-		}
-		return 1;
 	}
 }

@@ -5,14 +5,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.*;
-import android.graphics.Color;
 
 public class MainActivity extends Activity {
-	DrawTest drawTest;
     private AsyncTask<Void, Void, Void> task;
     private TextView textView_username[] = new TextView[11];
     private TextView textView_score[] = new TextView[11];
@@ -28,7 +25,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -47,6 +43,7 @@ public class MainActivity extends Activity {
             }
         }.execute();
 	}
+	
 	public void showScore(View view){
 		System.out.println(JavaToMysql.flag);
         progressBar = (ProgressBar)findViewById(R.id.progressBar1);
@@ -61,22 +58,20 @@ public class MainActivity extends Activity {
             @Override
             protected Void doInBackground(Void... params)
             {
-            	//JavaToMysql.insert_data("LemonBear", "123");
             	JavaToMysql.print_data();
                 return null;
             }
         }.execute();
-        //
-        while(JavaToMysql.flag!=1){
+        
+        while(JavaToMysql.flag != 1){
         	try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }
         progressBar.setVisibility(View.INVISIBLE);
-		setContentView(R.layout.highscoure);
+		setContentView(R.layout.highscore);
 	    textView_username[1]= (TextView) findViewById(R.id.textView1Username);
 	    textView_username[2]= (TextView) findViewById(R.id.textView2Username);
 	    textView_username[3]= (TextView) findViewById(R.id.textView3Username);
@@ -97,6 +92,7 @@ public class MainActivity extends Activity {
 	    textView_score[8]= (TextView) findViewById(R.id.textView8Score);
 	    textView_score[9]= (TextView) findViewById(R.id.textView9Score);
 	    textView_score[10]= (TextView) findViewById(R.id.textView10Score);
+	    
 	    int i;
 	    for(i=0;i<10;i++){
 	    	if(JavaToMysql.username[i]!=null){
@@ -110,8 +106,13 @@ public class MainActivity extends Activity {
 	    }
 	    JavaToMysql.flag=0;
 	}
-	public void showMenu(View View){
+	
+	public void showMenu(View View) {
 		setContentView(R.layout.activity_main);
+	}
+	
+	public void showAbout(View view) {
+		setContentView(R.layout.activity_about);
 	}
 }
 

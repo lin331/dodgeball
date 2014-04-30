@@ -12,6 +12,15 @@
 	<string name="Loading">Loading</string>
 	<string name="Leaderboard">Top 10 Players</string>
 	<string name="Username">Username</string>
+	<string name="restart">restart</string>
 	<string name="Score">Score</string>
+	<string name="gameover">Game Over!</string>
+	<string name="typename">Type your name</string>
+	<string name="course">CS252: Project 6</string>
+	<string name="created_by">Created by:</string>
+	<string name="name1">Hanxun Huang</string>
+	<string name="name2">Wells Lin</string>
+	<string name="name3">Bo Ling</string>
+	<string name="name4">Ao Liu</string>
 	
 </resources>

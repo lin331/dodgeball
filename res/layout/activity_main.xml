@@ -38,7 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/scores"
         android:layout_centerHorizontal="true"
-        android:text="@string/about"/>
+        android:text="@string/about" 
+        android:onClick="showAbout" />
 
     <ProgressBar
         android:id="@+id/progressBar1"

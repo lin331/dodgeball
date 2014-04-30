@@ -29,6 +29,7 @@ public class JavaToMysql {
     static String username[] = new String[1024] ;
     static int highscore[] = new int[1024];
     static int flag = 0;
+    
     public static void getConnection() {    
     	try{
     		HttpClient httpclient = new DefaultHttpClient();   
@@ -37,24 +38,26 @@ public class JavaToMysql {
     		HttpEntity entity = response.getEntity();
     		is = entity.getContent();
     		System.out.println("Connection Set");
-    	}catch(Exception e){
+    	} catch(Exception e) {
             Log.e("log_tag", "Error in http connection" + e.toString());
     	}
     }
+    
     public static int insert_data(String str1, String str2){
-    	 ArrayList nameValuePairs = new ArrayList();
-         nameValuePairs.add(new BasicNameValuePair("username",str1));
-         nameValuePairs.add(new BasicNameValuePair("score",str2));
-         try{
-             HttpClient httpclient = new DefaultHttpClient();
-             HttpPost httppost = new HttpPost("http://lemonbear.cu.cc/CS252/insert.php");
-             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-             HttpResponse response = httpclient.execute(httppost);
-        }catch(Exception e){
+		ArrayList nameValuePairs = new ArrayList();
+		nameValuePairs.add(new BasicNameValuePair("username",str1));
+		nameValuePairs.add(new BasicNameValuePair("score",str2));
+		try{
+		    HttpClient httpclient = new DefaultHttpClient();
+		    HttpPost httppost = new HttpPost("http://lemonbear.cu.cc/CS252/insert.php");
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+        } catch(Exception e) {
              Log.e("log_tag", "Error in http connection"+e.toString());
         }
     	return 0;
     }
+    
     public static void print_data() {
     	flag = 0;
     	getConnection();
@@ -84,7 +87,6 @@ public class JavaToMysql {
 	    		System.out.println("User:"+username[i]+" Highest Score:"+highscore[i]);
 	    	}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}           
 		flag = 1;

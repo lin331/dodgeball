@@ -11,18 +11,16 @@ public class GameActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_game);
-		view = new GameView(this);
+		setContentView(R.layout.activity_game);		
+		view = new GameView(this);		
 		RelativeLayout rl = (RelativeLayout) findViewById(R.id.relative_layout);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(480, 800);
-        rl.addView(view, params);
+        rl.addView(view, params);        
 		view.start();
 	}
 
     public void onPause() {
         super.onPause();
-        // When our activity pauses, we want our view to stop updating its logic.
-        // This prevents your application from running in the background, which eats up the battery.
         view.setActive(false);
     }
 	
