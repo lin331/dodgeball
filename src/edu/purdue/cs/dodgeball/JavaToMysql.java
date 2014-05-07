@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -18,7 +17,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.net.ParseException;
 import android.util.Log;
 
 public class JavaToMysql {  
@@ -30,6 +28,7 @@ public class JavaToMysql {
     static int highscore[] = new int[1024];
     static int flag = 0;
     
+    // Connect to database
     public static void getConnection() {    
     	try{
     		HttpClient httpclient = new DefaultHttpClient();   
@@ -43,21 +42,24 @@ public class JavaToMysql {
     	}
     }
     
+    // Add data to database
     public static int insert_data(String str1, String str2){
-		ArrayList nameValuePairs = new ArrayList();
+		ArrayList<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("username",str1));
 		nameValuePairs.add(new BasicNameValuePair("score",str2));
 		try{
 		    HttpClient httpclient = new DefaultHttpClient();
 		    HttpPost httppost = new HttpPost("http://lemonbear.cu.cc/CS252/insert.php");
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			HttpResponse response = httpclient.execute(httppost);
+			/* HttpResponse response = */
+			httpclient.execute(httppost);
         } catch(Exception e) {
              Log.e("log_tag", "Error in http connection"+e.toString());
         }
     	return 0;
     }
     
+    // Prints data from database
     public static void print_data() {
     	flag = 0;
     	getConnection();

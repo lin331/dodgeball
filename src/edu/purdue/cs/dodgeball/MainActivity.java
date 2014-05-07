@@ -1,6 +1,6 @@
 package edu.purdue.cs.dodgeball;
 
-import org.json.JSONException;
+//import org.json.JSONException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.*;
 
 public class MainActivity extends Activity {
-    private AsyncTask<Void, Void, Void> task;
+    //private AsyncTask<Void, Void, Void> task;
     private TextView textView_username[] = new TextView[11];
     private TextView textView_score[] = new TextView[11];
     private ProgressBar progressBar;
@@ -29,21 +29,20 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	// Starts a new game
 	public void startGame(View view) {
 		Intent intent = new Intent(this, GameActivity.class);
 		startActivity(intent);
-		task = new AsyncTask<Void, Void, Void>() {
+		new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params)
             {
-            	//username and score using string
-            	//JavaToMysql.insert_data(username, score);
-            	//JavaToMysql.print_data();
                 return null;
             }
         }.execute();
 	}
 	
+	// Show high score screen
 	public void showScore(View view){
 		System.out.println(JavaToMysql.flag);
         progressBar = (ProgressBar)findViewById(R.id.progressBar1);
@@ -54,7 +53,7 @@ public class MainActivity extends Activity {
 		//User name stored at JavaToMysql.username[] 
 		//Highest score stored at JavaToMysql.highscore[]
 		//
-		task = new AsyncTask<Void, Void, Void>() {
+        new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params)
             {
@@ -107,10 +106,12 @@ public class MainActivity extends Activity {
 	    JavaToMysql.flag=0;
 	}
 	
+	// Sets menu view
 	public void showMenu(View View) {
 		setContentView(R.layout.activity_main);
 	}
 	
+	// Shows about screen
 	public void showAbout(View view) {
 		setContentView(R.layout.activity_about);
 	}
